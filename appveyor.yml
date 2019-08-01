@@ -1,0 +1,9 @@
+version: 0.1.{build}
+image: Visual Studio 2019
+configuration: Release
+build_script:
+  - ps: dotnet build -c Release
+test_script:
+  - ps: pushd tests\ClamNet.Client.UnitTests; dotnet test; popd
+artifacts:
+  - path: src\ClamNet.Client\bin\Release\*.nupkg
