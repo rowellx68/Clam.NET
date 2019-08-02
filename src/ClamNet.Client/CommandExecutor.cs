@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using ClamNet.Client.Enums;
+using ClamNet.Client.Exceptions;
 
 namespace ClamNet.Client
 {
@@ -60,9 +61,10 @@ namespace ClamNet.Client
                     }
                 }
             }
-            //catch (Exception e)
-            //{
-            //}
+            catch
+            {
+                throw new ClamAvServerException(this.Host, this.Port);
+            }
             finally
             {
                 if (this.SocketClient.Connected)
