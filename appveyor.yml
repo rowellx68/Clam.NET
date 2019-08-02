@@ -15,6 +15,14 @@ dotnet_csproj:
   assembly_version: '{version}'
   file_version: '{version}'
   informational_version: '{version}'
+deploy:
+  provider: NuGet
+  server:
+  api_key:
+    secure: AyJMm45JtIDHVRZUuTT+C3NPLkPOsRHV33uYRg7pUBNoH4pz8/xPtA0KAnWKJU5E
+  skip_symbols: false
+  symbol_server:
+  artifact: /.*\.nupkg/
 build_script:
   - ps: dotnet build -c Release
 test_script:
