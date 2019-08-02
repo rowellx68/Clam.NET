@@ -1,4 +1,5 @@
-﻿using ClamNet.Client.Enums;
+﻿using System.Linq;
+using ClamNet.Client.Enums;
 using ClamNet.Client.Exceptions;
 using ClamNet.Client.Mappers;
 using ClamNet.Client.Models;
@@ -32,6 +33,43 @@ namespace ClamNet.Client.UnitTests.Mappers
             // Assert
             Assert.Equal(ScanStatus.Clean, result.Status);
             Assert.Empty(result.InfectedFiles);
+        }
+
+        [Theory]
+        [InlineData("error")]
+        [InlineData("ERROR")]
+        public void ToScanResult_ScanError_ReturnsExpectedResult(string value)
+        {
+            // Arrange
+            var rawResult = new RawScanResult(value);
+
+            // Act
+            var result = rawResult.ToScanResult();
+
+            // Assert
+            Assert.Equal(ScanStatus.Error, result.Status);
+            Assert.Empty(result.InfectedFiles);
+        }
+
+        [Theory]
+        [InlineData("stream: Some-Virus-Name found")]
+        [InlineData("stream: Some-Virus-Name FOUND")]
+        public void ToScanResult_VirusFound_ReturnsExpectedResult(string value)
+        {
+            // Arrange
+            var rawResult = new RawScanResult(value);
+
+            // Act
+            var result = rawResult.ToScanResult();
+
+            // Assert
+            Assert.Equal(ScanStatus.VirusDetected, result.Status);
+            Assert.Single(result.InfectedFiles);
+
+            var infected = result.InfectedFiles.First();
+            Assert.Equal(value, result.RawResult);
+            Assert.Equal("stream", infected.FileName);
+            Assert.Equal("Some-Virus-Name", infected.VirusName);
         }
     }
 }
