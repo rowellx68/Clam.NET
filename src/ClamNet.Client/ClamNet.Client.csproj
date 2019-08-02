@@ -10,6 +10,8 @@
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <Copyright>2019</Copyright>
     <Version>0.1.0</Version>
+    <PackageProjectUrl>https://github.com/rowellx68/Clam.NET</PackageProjectUrl>
+    <Authors>Rowell Heria</Authors>
   </PropertyGroup>
 
   <ItemGroup>
