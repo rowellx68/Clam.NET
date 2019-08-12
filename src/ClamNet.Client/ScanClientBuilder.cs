@@ -1,7 +1,13 @@
 ﻿namespace ClamNet.Client
 {
-    public class ScanClientBuilder : IScanClientBuilder, IScanClientConfigured
+    public class ScanClientBuilder : IScanClientBuilder
     {
+        public ScanClientBuilder(ISocketClient socketClient, ICommandExecutor commandExecutor)
+        {
+            this.SocketClient = socketClient;
+            this.CommandExecutor = commandExecutor;
+        }
+
         public string Host { get; private set; }
 
         public int Port { get; private set; }
@@ -25,7 +31,17 @@
             return this;
         }
 
-        public IScanClientConfigured WithCommandExecutor(ICommandExecutor executor)
+        public IScanClientBuilder WithDefaults()
+        {
+            this.Host = "localhost";
+            this.Port = 3310;
+
+            this.CommandExecutor.Configure(this.SocketClient, this.Host, this.Port);
+
+            return this;
+        }
+
+        public IScanClientBuilder WithCommandExecutor(ICommandExecutor executor)
         {
             executor.Configure(this.SocketClient, this.Host, this.Port);
 

@@ -5,11 +5,10 @@
         IScanClientBuilder WithServerAddress(string host, int port);
 
         IScanClientBuilder WithSocketClient(ISocketClient client);
-    }
 
-    public interface IScanClientConfigured
-    {
-        IScanClientConfigured WithCommandExecutor(ICommandExecutor executor);
+        IScanClientBuilder WithDefaults();
+
+        IScanClientBuilder WithCommandExecutor(ICommandExecutor executor);
 
         IScanClient Build();
     }
