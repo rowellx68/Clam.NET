@@ -9,3 +9,26 @@ A running instance of ClamAV server should be accessible at the host and port pr
 Binaries could be had from here: https://www.clamav.net/downloads
 
 ## Example Usage
+
+```csharp
+var executor = new CommandExecutor(new SocketClient(), "localhost", 3310);
+var client = new ScanClient(executor);
+
+var ping = await client.Ping();
+```
+
+```csharp
+class SomeClass
+{
+    public SomeClass(IScanClientBuilder builder, ISocketClient socketClient, ICommandExecutor commandExecutor)
+    {
+        this.ScanClient = builder
+            .WithServerAddress("localhost", 3310)
+            .WithSocketClient(socketClient)
+            .WithCommandExecutor(commandExecutor)
+            .Build();
+    }
+
+    private IScanClient ScanClient { get; }
+}
+```

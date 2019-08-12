@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RepositoryUrl>https://github.com/rowellx68/Clam.NET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>clamav, clamav client</PackageTags>
+    <PackageTags>clamav, client</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
@@ -12,6 +12,7 @@
     <Version>0.1.0</Version>
     <PackageProjectUrl>https://github.com/rowellx68/Clam.NET</PackageProjectUrl>
     <Authors>Rowell Heria</Authors>
+    <Description>A small client for ClamAV server which allows you to scan byte arrays for any malicious content.</Description>
   </PropertyGroup>
 
   <ItemGroup>
